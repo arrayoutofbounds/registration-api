@@ -10,7 +10,7 @@ export async function main(event, context) {
   const id = shortid.generate();
   // const qrFileStream = QrCode.toFileStream(fs.createWriteStream(), [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber]);
 
-  console.log(Qr.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""))
+  console.log(Qr.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""));
 
   try{
     await s3.call("upload", {
