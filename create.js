@@ -13,7 +13,7 @@ export async function main(event, context) {
   const opts = {
     errorCorrectionLevel: 'H',
     type: 'image/png',
-  }
+  };
 
   const dataUrl = QRCode.toDataURL([id, data.firstName, data.lastName], opts);
   console.log(dataUrl);
