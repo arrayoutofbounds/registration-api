@@ -1,4 +1,4 @@
-service: notes-app-2-api
+service: registration-api
 
 # Create an optimized package for our functions 
 package:
@@ -13,12 +13,14 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes
+  tableName: ${self:custom.stage}-attendees
+
+  #bucketname
+  bucketName: ${self:custom.stage}-attendees
   
   # Load our secret environment variables based on the current stage.
   # Fallback to default if it is not in prod.
   environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
-
 
 provider:
   name: aws
@@ -30,12 +32,15 @@ provider:
   # under process.env.
   environment:
     tableName: ${self:custom.tableName}
-    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
-
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
@@ -48,7 +53,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ AttendeesTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -64,7 +69,6 @@ functions:
           path: notes
           method: post
           cors: true
-          authorizer: aws_iam
 
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
@@ -111,15 +115,6 @@ functions:
       - http:
           path: notes/{id}
           method: delete
-          cors: true
-          authorizer: aws_iam
-
-  billing:
-    handler: billing.main
-    events:
-      - http:
-          path: billing
-          method: post
           cors: true
           authorizer: aws_iam
 

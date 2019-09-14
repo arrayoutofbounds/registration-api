@@ -1,6 +1,7 @@
 Resources:
-  AttachmentsBucket:
+  AttendeesBucket:
     Type: AWS::S3::Bucket
+    BucketName: ${self:custom.bucketName}
     Properties:
       # Set the CORS policy
       CorsConfiguration:
@@ -17,9 +18,3 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
-
-# Print out the name of the bucket that is created
-Outputs:
-  AttachmentsBucketName:
-    Value:
-      Ref: AttachmentsBucket

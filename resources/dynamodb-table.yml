@@ -1,17 +1,13 @@
 Resources:
-  NotesTable:
+  AttendeesTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableName}
       AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
-        - AttributeName: noteId
+        - AttributeName: id
           AttributeType: S
       KeySchema:
-        - AttributeName: userId
+        - AttributeName: id
           KeyType: HASH
-        - AttributeName: noteId
-          KeyType: RANGE
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
