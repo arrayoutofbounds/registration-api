@@ -19,7 +19,7 @@ export async function main(event, context) {
       ContentType: 'image/png'
     });
   } catch (e) {
-    return failure({ status: false, message: 'Failure to upload qr' });
+    return failure({ status: false, message: e });
   }
 
   const params = {
