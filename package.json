@@ -1,7 +1,7 @@
 {
-  "name": "serverless-nodejs-starter",
+  "name": "registration-backend",
   "version": "1.1.2",
-  "description": "A Node.js starter for the Serverless Framework with async/await and unit test support",
+  "description": "A registration backend",
   "main": "handler.js",
   "scripts": {
     "test": "serverless-bundle test"
