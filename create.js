@@ -10,7 +10,12 @@ export async function main(event, context) {
   const id = shortid.generate();
   // const qrFileStream = QrCode.toFileStream(fs.createWriteStream(), [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber]);
 
-  const dataUrl = QRCode.toDataURL([id, data.firstName, data.lastName]);
+  const opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/png',
+  }
+
+  const dataUrl = QRCode.toDataURL([id, data.firstName, data.lastName], opts);
   console.log(dataUrl);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
