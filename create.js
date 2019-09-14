@@ -12,7 +12,7 @@ export async function main(event, context) {
 
   const dataUrl = QRCode.toDataURL([id, data.firstName, data.lastName]);
   console.log(dataUrl);
-  const buffer = new Buffer(dataUrl.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+  const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
   try{
     await s3.call("upload", {
