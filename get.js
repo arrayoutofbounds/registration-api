@@ -7,7 +7,7 @@ export async function main(event, context) {
     // 'Key' defines the partition key and sort key of the item to be retrieved
     // - 'userId': Identity Pool identity id of the authenticated user
     // - 'noteId': path parameter
-    Key: {\
+    Key: {
       id: event.pathParameters.id
     }
   };
