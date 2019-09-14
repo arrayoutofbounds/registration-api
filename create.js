@@ -15,7 +15,7 @@ export async function main(event, context) {
     type: 'image/png',
   };
 
-  const dataUrl = QRCode.toDataURL([id, data.firstName, data.lastName], opts);
+  const dataUrl = await QRCode.toDataURL([id, data.firstName, data.lastName], opts);
   console.log(dataUrl);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
