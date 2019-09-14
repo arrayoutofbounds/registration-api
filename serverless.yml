@@ -36,11 +36,9 @@ provider:
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
+    # - Effect: Allow
+    #   Action: s3:*
+    #   Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
@@ -50,10 +48,12 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - s3:*
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
         - "Fn::GetAtt": [ AttendeesTable, Arn ]
+        - "Fn::GetAtt": [ AttendeesBucket, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
