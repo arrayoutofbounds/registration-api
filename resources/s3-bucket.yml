@@ -1,8 +1,8 @@
 Resources:
   AttendeesBucket:
     Type: AWS::S3::Bucket
-    BucketName: ${self:custom.bucketName}
     Properties:
+      BucketName: ${self:custom.bucketName}
       # Set the CORS policy
       CorsConfiguration:
         CorsRules:
