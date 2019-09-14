@@ -2,7 +2,7 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import * as s3 from "./libs/s3-lib";
 import { success, failure } from "./libs/response-lib";
 import shortid from 'shortid';
-import Qr from 'qrcode';
+import QRCode from 'qrcode';
 // import fs from 'fs';
 
 export async function main(event, context) {
@@ -10,13 +10,13 @@ export async function main(event, context) {
   const id = shortid.generate();
   // const qrFileStream = QrCode.toFileStream(fs.createWriteStream(), [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber]);
 
-  console.log(Qr.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""));
+  console.log(QRCode.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""));
 
   try{
     await s3.call("upload", {
       Bucket: process.env.bucketName,
       Key: `${id}.png`,
-      Body: new Buffer(Qr.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""),'base64'),
+      Body: new Buffer(QRCode.toDataURL([id, data.firstName, data.lastName]).replace(/^data:image\/\w+;base64,/, ""),'base64'),
       ContentEncoding: 'base64',
       ContentType: 'image/png'
     });
