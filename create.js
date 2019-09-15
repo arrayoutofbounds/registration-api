@@ -52,6 +52,8 @@ export async function main(event, context) {
       qr: `${id}.png`,
       timeSlot: data.timeSlot,
       dataUrl,
+      pointsAccumulated: 0,
+      pointsRedeemed: 0,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     }

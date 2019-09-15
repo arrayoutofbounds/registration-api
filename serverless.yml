@@ -120,6 +120,33 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  confirmRegistration:
+    handler: confirmRegistration.main
+    events:
+      - http:
+        path: confirmRegistration
+        method: put
+        cors: true
+        authorizer: aws_iam
+
+  givePoints:
+    handler: givePoints.main
+    events:
+      - http:
+        path: givePoints
+        method: put
+        cors: true
+        authorizer: aws_iam
+
+  redeemPoints:
+    handler: redeemPoints.main
+    events:
+      - http:
+        path: redeemPoints
+        method: put
+        cors: true
+        authorizer: aws_iam
+
 
 # Create our resources with separate CloudFormation templates
 resources:
