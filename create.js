@@ -67,6 +67,7 @@ export async function main(event, context) {
   }
 
   // send an email using SES
+  
   try{
     await sesLib.call(params.Item);
     return success(params.Item);
