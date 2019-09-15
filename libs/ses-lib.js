@@ -26,4 +26,3 @@
 //     // send email
 //     return transporter.sendMail(mailOptions);
 //   }
-  
