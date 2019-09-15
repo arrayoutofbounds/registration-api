@@ -3,7 +3,7 @@ import * as s3 from "./libs/s3-lib";
 import { success, failure } from "./libs/response-lib";
 import shortid from 'shortid';
 import QRCode from 'qrcode';
-// import fs from 'fs';
+import * as sesLib from './libs/ses-lib';
 
 export async function main(event, context) {
   const data = JSON.parse(event.body);
@@ -16,9 +16,9 @@ export async function main(event, context) {
   };
 
   const dataUrl = await QRCode.toDataURL([id, data.firstName, data.lastName], opts);
-  console.log(dataUrl);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
+  // upload qr code to s3
   try{
     await s3.call("upload", {
       Bucket: process.env.bucketName,
@@ -50,15 +50,25 @@ export async function main(event, context) {
       emergencyContact: data.emergencyContact,
       emergencyNumber: data.emergencyNumber,
       qr: `${id}.png`,
+      timeSlot: data.timeSlot,
+      dataUrl,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     }
   };
 
+  // store into database
   try {
     await dynamoDbLib.call("put", params);
-    return success(params.Item);
   } catch (e) {
+    return failure({ status: false });
+  }
+
+  // send an email using SES
+  try{
+    await sesLib.call(params.Item);
+    return success(params.Item);
+  } catch(e){
     return failure({ status: false });
   }
 }
