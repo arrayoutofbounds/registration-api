@@ -63,7 +63,7 @@ export async function main(event, context) {
   try {
     await dynamoDbLib.call("put", params);
   } catch (e) {
-    return failure({ status: false });
+    return failure({ status: 'failed inserting into database' });
   }
 
   // send an email using SES
@@ -71,6 +71,6 @@ export async function main(event, context) {
     await sesLib.call(params.Item);
     return success(params.Item);
   } catch(e){
-    return failure({ status: false });
+    return failure({ status: 'failed sending email', error: e });
   }
 }
