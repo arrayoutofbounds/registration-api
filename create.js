@@ -14,9 +14,15 @@ export async function main(event, context) {
     type: 'image/png',
   };
 
-  const dataToEncode = [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber].join(",");
+  const dataToEncode = {
+    id,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    emergencyContact: data.emergencyContact,
+    emergencyNumber: data.emergencyNumber
+  };
 
-  const dataUrl = await QRCode.toDataURL(dataToEncode, opts);
+  const dataUrl = await QRCode.toDataURL(JSON.stringify(dataToEncode), opts);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
   // upload qr code to s3
@@ -51,10 +57,9 @@ export async function main(event, context) {
       emergencyContact: data.emergencyContact,
       emergencyNumber: data.emergencyNumber,
       qr: `${id}.png`,
-      timeSlot: data.timeSlot,
+      timeSlot: data.timeSlot, // 1 or 2
       dataUrl,
-      pointsAccumulated: 0,
-      pointsRedeemed: 0,
+      points: 0,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     }
