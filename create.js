@@ -8,14 +8,15 @@ import * as sesLib from './libs/ses-lib';
 export async function main(event, context) {
   const data = JSON.parse(event.body);
   const id = shortid.generate();
-  // const qrFileStream = QrCode.toFileStream(fs.createWriteStream(), [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber]);
 
   const opts = {
     errorCorrectionLevel: 'H',
     type: 'image/png',
   };
 
-  const dataUrl = await QRCode.toDataURL([id, data.firstName, data.lastName], opts);
+  const dataToEncode = [id, data.firstName, data.lastName, data.emergencyContact, data.emergencyNumber].join(",");
+
+  const dataUrl = await QRCode.toDataURL(dataToEncode, opts);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
   // upload qr code to s3
