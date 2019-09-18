@@ -10,7 +10,7 @@ export function call(item) {
         <p> BAPS is glad to present ${item.firstName} ${item.lastName} with an invitation to the 2019 kids diwali festival <p>
         <p> Please see the attached qr code belo. Each attendee is given a unique code. Please bring it with you child to ensure entry.</p>
         <p> Your time slot is ${item.timeSlot === 1 ? "10am - 1pm" : "1pm - 4pm"} </p>
-        <p> Qr code <img src="cid:${item.id}"/> </p>
+        <img src="cid:${item.id}"/>
         <p> Jai Swaminarayan </p>`;
 
     const mailOptions = {
