@@ -131,10 +131,10 @@ functions:
     handler: confirmRegistration.main
     events:
       - http:
-        path: confirmRegistration/{id}
-        method: put
-        cors: true
-        authorizer: aws_iam
+          path: confirmRegistration/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
   
   getPoints:
     handler: getPoints.main
