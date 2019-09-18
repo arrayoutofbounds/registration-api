@@ -149,19 +149,19 @@ functions:
     handler: givePoints.main
     events:
       - http:
-        path: givePoints/{id}
-        method: put
-        cors: true
-        authorizer: aws_iam
+          path: givePoints/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
 
   redeemPoints:
     handler: redeemPoints.main
     events:
       - http:
-        path: redeemPoints/{id}
-        method: put
-        cors: true
-        authorizer: aws_iam
+          path: redeemPoints/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
 
 
 # Create our resources with separate CloudFormation templates
