@@ -149,7 +149,7 @@ functions:
     handler: givePoints.main
     events:
       - http:
-        path: givePoints
+        path: givePoints/{id}
         method: put
         cors: true
         authorizer: aws_iam
@@ -158,7 +158,7 @@ functions:
     handler: redeemPoints.main
     events:
       - http:
-        path: redeemPoints
+        path: redeemPoints/{id}
         method: put
         cors: true
         authorizer: aws_iam
