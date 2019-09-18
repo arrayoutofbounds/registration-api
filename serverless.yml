@@ -118,14 +118,14 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # getTimeAvailability:
-  #   handler: timeSlot.main
-  #   events:
-  #     - http:
-  #         path: timeslot
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  timeSlotAvailability:
+    handler: timeSlotAvailability.main
+    events:
+      - http:
+          path: timeSlotAvailability
+          method: get
+          cors: true
+          authorizer: aws_iam
 
   confirmRegistration:
     handler: confirmRegistration.main
