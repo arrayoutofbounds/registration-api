@@ -162,6 +162,15 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+  
+  activityAttended:
+    handler: activityAttended.main
+    events:
+      - http:
+          path: activityAttended/{activityId}/attendee/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
 
 
 # Create our resources with separate CloudFormation templates

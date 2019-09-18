@@ -51,7 +51,7 @@ export async function main(event, context) {
       fatherMobile: data.fatherMobile,
       motherMobile: data.motherMobile,
       isRegistered: false,
-      activities: [],
+      activities: {},
       email: data.email,
       age: data.age,
       emergencyContact: data.emergencyContact,
