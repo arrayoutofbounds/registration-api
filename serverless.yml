@@ -125,7 +125,6 @@ functions:
           path: timeSlotAvailability
           method: get
           cors: true
-          authorizer: aws_iam
 
   confirmRegistration:
     handler: confirmRegistration.main
