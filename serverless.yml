@@ -38,7 +38,10 @@ provider:
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
-      Action: s3:*
+      Action: 
+        - s3:*
+        - s3GetObject
+        - s3:PutObject
       Resource:
         - "Fn::GetAtt": [ AttendeesBucket, Arn ]
     # - Effect: Allow
