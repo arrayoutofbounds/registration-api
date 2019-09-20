@@ -87,6 +87,5 @@ export async function main(event, context) {
     console.log("sending email failed");
     return failure({ status: 'failed sending email', error: e });
   }
-  
   console.log("It went well!");
 }
