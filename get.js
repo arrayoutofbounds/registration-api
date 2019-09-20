@@ -9,7 +9,8 @@ export async function main(event, context) {
     // - 'noteId': path parameter
     Key: {
       id: event.pathParameters.id
-    }
+    },
+    ProjectionExpression: "id, firstName, lastName, fatherName, motherName, age, address, email, fatherMobile, motherMobile, isRegistered, points, timeSlot, emergencyContact, emergencyNumber"
   };
 
   try {
