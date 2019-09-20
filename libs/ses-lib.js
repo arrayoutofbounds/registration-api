@@ -5,11 +5,12 @@ export function call(item) {
     const ses = new AWS.SES({apiVersion: '2010-12-01', region: 'us-west-2'});
 
     const message = `
-        <p> Jai Swaminarayan </p>
+        <p> Jai Swaminarayan!</p>
 
-        <p> BAPS is glad to present ${item.firstName} ${item.lastName} with an invitation to the 2019 kids diwali festival <p>
-        <p> Please see the attached qr code belo. Each attendee is given a unique code. Please bring it with you child to ensure entry.</p>
-        <p> Your time slot is ${item.timeSlot === 1 ? "10am - 1pm" : "1pm - 4pm"} </p>
+        <p> BAPS would like to cordially invite ${item.firstName} ${item.lastName} to the 2019 kids diwali festival on 27th October 2019 at the Rosehill race course!<p>
+        <p> The day will be packed with fun activities, exhibition, diwali show, rides and food!</p>
+        <p> Please see the attached QR code below. You can either show the embedded code or download and print off the attachment. Each attendee has a unique code. Please bring it with your to ensure entry.</p>
+        <p> Your time slot is ${item.timeSlot === 1 ? "10am - 1pm" : "1pm - 4pm"}. Please come in designated slot.</p>
         <img src="cid:${item.id}"/>
         <p> Jai Swaminarayan </p>`;
 
