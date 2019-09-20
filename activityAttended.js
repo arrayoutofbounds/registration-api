@@ -53,6 +53,7 @@ export async function main(event, context) {
             return failure({ status: false, error: "Activities not found." });
         }
     } catch (e) {
+        console.log("failed with ", e);
         return failure({ status: false });
     }
 }
