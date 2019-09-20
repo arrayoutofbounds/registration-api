@@ -29,6 +29,7 @@ export async function main(event, context) {
 
   // upload qr code to s3
   try{
+    console.log(process.env.bucketName);
     await s3.call("upload", {
       Bucket: process.env.bucketName,
       Key: `${id}.png`,
