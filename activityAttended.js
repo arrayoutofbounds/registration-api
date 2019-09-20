@@ -12,6 +12,8 @@ export async function main(event, context) {
         ProjectionExpression: "activities"
     };
 
+    console.log("About to update activity count");
+
     try {
         const activityItems = await dynamoDbLib.call("get", getItemParams);
         if (activityItems.Item) {
@@ -19,6 +21,8 @@ export async function main(event, context) {
             const activityToUpdate = activities[activityAttended] || {
                 attendedCount: 0
             };
+
+            console.log("updatomg count");
 
             activityToUpdate.attendedCount += 1;
 
@@ -39,6 +43,7 @@ export async function main(event, context) {
             };
 
             try {
+                console.log("Run update");
                 await dynamoDbLib.call("update", params);
                 return success({ status: true });
             } catch (e) {
