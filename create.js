@@ -25,6 +25,8 @@ export async function main(event, context) {
   const dataUrl = await QRCode.toDataURL(JSON.stringify(dataToEncode), opts);
   const buffer = new Buffer(dataUrl.toString().replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
+  console.log("uploading to s3");
+
   // upload qr code to s3
   try{
     await s3.call("upload", {
@@ -35,9 +37,12 @@ export async function main(event, context) {
       ContentType: 'image/png'
     });
   } catch (e) {
+    console.log("upload to s3 failed");
     console.log(e);
     return failure({ status: false, message: e });
   }
+
+  console.log("adding to table");
 
   const params = {
     TableName: process.env.tableName,
@@ -69,14 +74,19 @@ export async function main(event, context) {
   try {
     await dynamoDbLib.call("put", params);
   } catch (e) {
+    console.log("adding to table failed");
     return failure({ status: 'failed inserting into database' });
   }
 
   // send an email using SES
   try{
+    console.log("sending email");
     await sesLib.call(params.Item);
     return success(params.Item);
   } catch(e){
+    console.log("sending email failed");
     return failure({ status: 'failed sending email', error: e });
   }
+  
+  console.log("It went well!");
 }
