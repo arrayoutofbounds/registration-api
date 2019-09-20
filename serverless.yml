@@ -45,11 +45,11 @@ provider:
       Resource:
         - "Fn::GetAtt": [ AttendeesBucket, Arn ]
         - "arn:aws:s3:::${self:custom.bucketName}/*"
-    # - Effect: Allow
-    #   Action: 
-    #     - ses:SendEmail
-    #     - ses:SendRawEmail
-    #   Resource: *
+    - Effect: Allow
+      Action: 
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource: *
     - Effect: Allow
       Action: 
         - logs:CreateLogGroup,
