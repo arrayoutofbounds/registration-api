@@ -179,6 +179,7 @@ functions:
     events:
       - stream:
           type: dynamodb
+          authorizer: aws_iam
           startingPosition: LATEST
           enabled: true
           arn:
