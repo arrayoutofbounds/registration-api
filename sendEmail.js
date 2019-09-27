@@ -13,10 +13,8 @@ export async function main(event, context) {
             try {
                 console.log("sending email");
                 await sesLib.call(unMarshelledRecord);
-                return success(unMarshelledRecord);
             } catch (e) {
                 console.log("sending email failed");
-                return failure({ status: 'failed sending email', error: e });
             }
         }
     });
