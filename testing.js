@@ -7,6 +7,6 @@ export async function main(event, context) {
         if(record.eventName === 'INSERT'){
             const unMarshelledRecord = converter.unmarshall(record.dynamodb.NewImage);
             console.log(unMarshelledRecord);
-        }  
+        }
     });
 }
