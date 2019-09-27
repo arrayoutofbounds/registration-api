@@ -183,7 +183,6 @@ functions:
         arn:
           Fn::GetAtt: [ AttendeesTable, StreamArn ]
 
-arn:aws:ap-southeast-2:${AWS::AccountId}:${self:custom.tableName}/
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
