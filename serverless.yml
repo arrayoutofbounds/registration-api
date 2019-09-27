@@ -178,11 +178,11 @@ functions:
     handler: testing.main
     events:
       - stream:
-        type: dynamodb
-        startingPosition: LATEST
-        enabled: true
-        arn:
-          Fn::GetAtt: [ AttendeesTable, StreamArn ]
+          type: dynamodb
+          startingPosition: LATEST
+          enabled: true
+          arn:
+            Fn::GetAtt: [ AttendeesTable, StreamArn ]
 
 # Create our resources with separate CloudFormation templates
 resources:
