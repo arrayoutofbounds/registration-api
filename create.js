@@ -3,7 +3,6 @@ import * as s3 from "./libs/s3-lib";
 import { success, failure } from "./libs/response-lib";
 import shortid from 'shortid';
 import QRCode from 'qrcode';
-import * as sesLib from './libs/ses-lib';
 
 export async function main(event, context) {
   const data = JSON.parse(event.body);
@@ -74,19 +73,9 @@ export async function main(event, context) {
   // store into database
   try {
     await dynamoDbLib.call("put", params);
+    return success("Added to database");
   } catch (e) {
     console.log("adding to table failed");
     return failure({ status: 'failed inserting into database' });
   }
-
-  // send an email using SES
-  try{
-    console.log("sending email");
-    await sesLib.call(params.Item);
-    return success(params.Item);
-  } catch(e){
-    console.log("sending email failed");
-    return failure({ status: 'failed sending email', error: e });
-  }
-  console.log("It went well!");
 }

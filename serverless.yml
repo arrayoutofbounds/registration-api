@@ -174,8 +174,8 @@ functions:
           cors: true
           authorizer: aws_iam
   
-  testing:
-    handler: testing.main
+  sendEmail:
+    handler: sendEmail.main
     events:
       - stream:
           type: dynamodb
