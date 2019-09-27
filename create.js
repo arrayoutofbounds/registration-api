@@ -73,7 +73,7 @@ export async function main(event, context) {
   // store into database
   try {
     await dynamoDbLib.call("put", params);
-    return success("Added to database");
+    return success(params.Item);
   } catch (e) {
     console.log("adding to table failed");
     return failure({ status: 'failed inserting into database' });
