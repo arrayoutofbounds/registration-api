@@ -173,8 +173,17 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+  
+  testing:
+    handler: testing.main
+    events:
+      - stream:
+        type: dynamodb
+        startingPosition: LATEST
+        arn:
+          Fn::GetAtt: [ AttendeesTable, StreamArn ]
 
-
+arn:aws:ap-southeast-2:${AWS::AccountId}:${self:custom.tableName}/
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
