@@ -4,10 +4,9 @@ import * as sesLib from './libs/ses-lib';
 const converter = DynamoDB.Converter;
 
 export async function main(event, context) {
-    event.Records.forEach(async record => {
+    for (let record in event.Records) {
         if (record.eventName === 'INSERT') {
             const unMarshelledRecord = converter.unmarshall(record.dynamodb.NewImage);
-
             // send an email using SES
             try {
                 console.log("sending email");
@@ -16,5 +15,5 @@ export async function main(event, context) {
                 console.log("sending email failed");
             }
         }
-    });
+    }
 }
