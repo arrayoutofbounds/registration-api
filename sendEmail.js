@@ -4,7 +4,7 @@ import * as sesLib from './libs/ses-lib';
 const converter = DynamoDB.Converter;
 
 export async function main(event, context) {
-    event.Records.forEach(record => {
+    event.Records.forEach(async record => {
         if (record.eventName === 'INSERT') {
             const unMarshelledRecord = converter.unmarshall(record.dynamodb.NewImage);
 
