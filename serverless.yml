@@ -180,6 +180,7 @@ functions:
       - stream:
         type: dynamodb
         startingPosition: LATEST
+        enabled: true
         arn:
           Fn::GetAtt: [ AttendeesTable, StreamArn ]
 
