@@ -8,9 +8,12 @@ export async function main(event, context) {
     for (let record in event.Records) {
         if (record.eventName === 'INSERT') {
             const unMarshelledRecord = converter.unmarshall(record.dynamodb.NewImage);
+
+            console.log(unMarshelledRecord);
             // send an email using SES
             try {
                 console.log("sending email");
+                console.log(unMarshelledRecord);
                 await sesLib.call(unMarshelledRecord);
             } catch (e) {
                 console.log("sending email failed");
